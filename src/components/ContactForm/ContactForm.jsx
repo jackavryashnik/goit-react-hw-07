@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import 'yup-phone';
 import css from './ContactForm.module.css';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contactsOps';
 import { useDispatch } from 'react-redux';
 
 const SignupSchema = Yup.object().shape({
@@ -24,7 +24,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleAddContact = (values, actions) => {
-    dispatch(addContact({ ...values, id: nanoid() }));
+    dispatch(addContact({ ...values, createdAt: Date.now(), id: nanoid() }));
     actions.resetForm();
   };
 
